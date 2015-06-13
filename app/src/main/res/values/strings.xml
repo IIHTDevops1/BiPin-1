@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BIPIN</string>
+    <string name="app_name">BiPin</string>
     <string name="error">Error</string>
     <string name="global_spinner_please_select">Please Select</string>
     <string name="fragment_splash_screen_page_welcome">Welcome</string>

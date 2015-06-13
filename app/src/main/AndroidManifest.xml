@@ -1,16 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="andycheung.baseproject">
+    package="IVYE.BiPin">
 
     <application
-        android:name="andycheung.baseproject.MyApplication"
+        android:name="IVYE.BiPin.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <activity android:name=".activities.launch.SplashScreenActivity">
+        <activity android:name="IVYE.BiPin.activities.launch.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,7 +18,7 @@
         </activity>
 
 
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name="IVYE.BiPin.activities.MainActivity" />
 
     </application>
 

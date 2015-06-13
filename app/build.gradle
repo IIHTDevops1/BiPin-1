@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "andycheung.baseproject"
+        applicationId "IVYE.BiPin"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -33,18 +33,21 @@ android {
         gt_uat {
             buildConfigField "String", "productFlavor", "\"own_uat\""
             manifestPlaceholders = [appName: "Own-UAT"]
-            applicationId "baseproject.own.uat"
+            applicationId 'BiPin.own.uat'
         }
         oc_sit {
             buildConfigField "String", "productFlavor", "\"client_sit\""
             manifestPlaceholders = [appName: "Client-SIT"]
-            applicationId "baseproject.client.sit"
+            applicationId 'BiPin.client.sit'
         }
-        oc_uat{
+        oc_uat {
             buildConfigField "String", "productFlavor", "\"client_uat\""
             manifestPlaceholders = [appName: "Client-UAT"]
-            applicationId "baseproject.client.uat"
+            applicationId 'BiPin.client.uat'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
     }
 }
 
@@ -61,12 +64,11 @@ dependencies {
     compile 'com.balysv.materialmenu:material-menu:1.5.4'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-    compile project(':volley')
     compile 'cn.pedant.sweetalert:library:1.3'
     compile 'com.github.ganfra:material-spinner:1.1.0'
     compile 'com.ikimuhendis:ldrawer:0.1'
     compile 'it.neokree:MaterialNavigationDrawer:1.3.3'
     compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'com.android.support:recyclerview-v7:21.0.+'
-
+    compile 'com.mcxiaoke.volley:library:1.0.+'
 }

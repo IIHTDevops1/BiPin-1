@@ -6,9 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import andycheung.baseproject.R;
+import IVYE.BiPin.R;
 
 /**
  * Created by IGA on 9/6/2015.
