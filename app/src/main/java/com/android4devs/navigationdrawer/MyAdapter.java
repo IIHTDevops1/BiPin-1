@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import IVYE.BiPin.R;
+import ivye.bipin.R;
 
 /**
  * Created by IGA on 9/6/2015.

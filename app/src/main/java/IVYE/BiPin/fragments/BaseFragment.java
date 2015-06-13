@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments;
+package ivye.bipin.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,8 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 import android.view.View;
 
-import IVYE.BiPin.util.DataUtil;
-import IVYE.BiPin.util.LogUtil;
+import ivye.bipin.util.DataUtil;
+import ivye.bipin.util.LogUtil;
 
 
 /**

@@ -1,4 +1,4 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentActivity;
 
 import java.util.Locale;
 
-import IVYE.BiPin.MyApplication;
-import IVYE.BiPin.util.MyEnum.MyLanguage;
+import ivye.bipin.MyApplication;
+import ivye.bipin.util.MyEnum.MyLanguage;
 
 /**
  * Created by Andy Cheung on 4/5/15.

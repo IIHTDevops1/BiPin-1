@@ -1,4 +1,4 @@
-package IVYE.BiPin.adapter;
+package ivye.bipin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 
-import IVYE.BiPin.R;
-import IVYE.BiPin.pojo.ListData;
+import ivye.bipin.R;
+import ivye.bipin.pojo.ListData;
 
 
 /**

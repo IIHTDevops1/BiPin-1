@@ -1,6 +1,6 @@
-package IVYE.BiPin.helper;
+package ivye.bipin.helper;
 
-import IVYE.BiPin.util.LogUtil;
+import ivye.bipin.util.LogUtil;
 
 public class ActivityMonitorHelper {
     private static final ActivityMonitorHelper instance = new ActivityMonitorHelper();

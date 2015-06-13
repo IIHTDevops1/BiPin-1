@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments.dialog;
+package ivye.bipin.fragments.dialog;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import IVYE.BiPin.util.DataUtil;
+import ivye.bipin.util.DataUtil;
 
 
 /**

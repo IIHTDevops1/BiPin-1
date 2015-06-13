@@ -1,8 +1,8 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.util.Log;
 
-import IVYE.BiPin.MyConstant;
+import ivye.bipin.MyConstant;
 
 
 /**

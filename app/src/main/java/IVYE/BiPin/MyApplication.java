@@ -1,4 +1,4 @@
-package IVYE.BiPin;
+package ivye.bipin;
 
 import android.app.Application;
 import android.content.res.Configuration;

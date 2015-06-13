@@ -7,7 +7,7 @@
         android:id="@+id/com.dsla_lps.android.fragments.launch.splashScreenFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="andycheung.BiPin.fragments.launch.SplashScreenFragment" />
+        class="ivye.bipin.fragments.launch.SplashScreenFragment" />
 
 
 </LinearLayout>

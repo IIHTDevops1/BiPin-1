@@ -1,10 +1,10 @@
-package IVYE.BiPin.fragments;
+package ivye.bipin.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import IVYE.BiPin.util.LogUtil;
+import ivye.bipin.util.LogUtil;
 
 
 /**

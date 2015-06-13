@@ -1,4 +1,4 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import java.util.Locale;
 

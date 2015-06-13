@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments.launch;
+package ivye.bipin.fragments.launch;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import IVYE.BiPin.MyApplication;
-import IVYE.BiPin.R;
-import IVYE.BiPin.activities.MainActivity;
-import IVYE.BiPin.fragments.BaseFragment;
-import IVYE.BiPin.util.LogUtil;
+import ivye.bipin.MyApplication;
+import ivye.bipin.R;
+import ivye.bipin.activities.MainActivity;
+import ivye.bipin.fragments.BaseFragment;
+import ivye.bipin.util.LogUtil;
 
 /**
  * Created by IGA on 8/6/15.

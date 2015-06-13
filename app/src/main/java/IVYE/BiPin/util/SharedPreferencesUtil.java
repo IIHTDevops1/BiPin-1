@@ -1,10 +1,10 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import IVYE.BiPin.MyApplication;
-import IVYE.BiPin.MyConstant;
+import ivye.bipin.MyApplication;
+import ivye.bipin.MyConstant;
 
 
 /**

@@ -1,4 +1,4 @@
-package IVYE.BiPin.activities;
+package ivye.bipin.activities;
 
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -15,10 +15,10 @@ import com.android4devs.navigationdrawer.MyAdapter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import IVYE.BiPin.MyConstant;
-import IVYE.BiPin.R;
-import IVYE.BiPin.fragments.MainFragment;
-import IVYE.BiPin.util.FragmentFlowUtil;
+import ivye.bipin.MyConstant;
+import ivye.bipin.R;
+import ivye.bipin.fragments.MainFragment;
+import ivye.bipin.util.FragmentFlowUtil;
 
 /**
  * Created by IGA on 4/6/15.
@@ -35,11 +35,11 @@ public class MainActivity extends BaseActivity {
         @Override
         public void publish(LogRecord record) {}
     };
-    String TITLES[] = {"Events","Mail"};
-    int ICONS[] = {R.drawable.ic_events, R.drawable.ic_mail};
+    String TITLES[] = {"新檢索","更新資料庫", "關於我們"};
+    int ICONS[] = {R.drawable.ic_action_new, R.drawable.ic_action_about, R.drawable.ic_action_about};
 
-    String NAME = "Akash Bangad";
-    String EMAIL = "akash.bangad@android4devs.com";
+    String NAME = "BiPin";
+    String EMAIL = "BiPin@homework.tw";
     int PROFILE = R.drawable.ic_arrow_drop_down_white_24dp;
 
     private Toolbar toolbar;
@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         toolbar.setTitleTextColor(R.color.white);
         toolbar.setTitle("");
-        toolbar.setNavigationIcon(R.drawable.ic_action_back);
+        toolbar.setNavigationIcon(R.drawable.ic_drawer);
         setSupportActionBar(toolbar);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View

@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments;
+package ivye.bipin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import IVYE.BiPin.R;
+import ivye.bipin.R;
 /**
  * Created by IGA on 10/6/15.
  */

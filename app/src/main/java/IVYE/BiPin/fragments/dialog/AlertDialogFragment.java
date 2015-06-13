@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments.dialog;
+package ivye.bipin.fragments.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,8 +12,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import IVYE.BiPin.MyConstant;
-import IVYE.BiPin.activities.BaseActivity;
+import ivye.bipin.MyConstant;
+import ivye.bipin.activities.BaseActivity;
 
 
 /**

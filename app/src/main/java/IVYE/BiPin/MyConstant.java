@@ -1,4 +1,4 @@
-package IVYE.BiPin;
+package ivye.bipin;
 
 import android.annotation.SuppressLint;
 import android.os.Environment;

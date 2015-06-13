@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments;
+package ivye.bipin.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +15,9 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import IVYE.BiPin.MyConstant;
-import IVYE.BiPin.R;
-import IVYE.BiPin.util.FragmentFlowUtil;
+import ivye.bipin.MyConstant;
+import ivye.bipin.R;
+import ivye.bipin.util.FragmentFlowUtil;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import fr.ganfra.materialspinner.MaterialSpinner;
 

@@ -1,4 +1,4 @@
-package IVYE.BiPin.fragments.dialog;
+package ivye.bipin.fragments.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

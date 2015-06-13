@@ -1,9 +1,9 @@
-package  IVYE.BiPin.activities.launch;
+package  ivye.bipin.activities.launch;
 
 import android.os.Bundle;
 
-import IVYE.BiPin.R;
-import IVYE.BiPin.activities.BaseActivity;
+import ivye.bipin.R;
+import ivye.bipin.activities.BaseActivity;
 
 /**
  * Created by IGA on 4/6/15.

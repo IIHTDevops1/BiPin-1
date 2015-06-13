@@ -1,4 +1,4 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

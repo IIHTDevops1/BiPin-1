@@ -1,4 +1,4 @@
-package IVYE.BiPin.pojo;
+package ivye.bipin.pojo;
 
 
 public class ListData<T> {

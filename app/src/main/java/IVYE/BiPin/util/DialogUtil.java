@@ -1,4 +1,4 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,11 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import IVYE.BiPin.MyConstant;
-import IVYE.BiPin.R;
-import IVYE.BiPin.fragments.dialog.AlertDialogFragment;
-import IVYE.BiPin.fragments.dialog.CustomeMessageLoadingDialogFragment;
-import IVYE.BiPin.helper.ActivityMonitorHelper;
+import ivye.bipin.MyConstant;
+import ivye.bipin.R;
+import ivye.bipin.fragments.dialog.AlertDialogFragment;
+import ivye.bipin.fragments.dialog.CustomeMessageLoadingDialogFragment;
+import ivye.bipin.helper.ActivityMonitorHelper;
 
 /**
  * Created by Andy Cheung on 11/5/15.

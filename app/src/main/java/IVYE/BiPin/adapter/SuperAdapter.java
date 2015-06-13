@@ -1,4 +1,4 @@
-package IVYE.BiPin.adapter;
+package ivye.bipin.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import IVYE.BiPin.pojo.ListData;
+import ivye.bipin.pojo.ListData;
 
 public class SuperAdapter<T extends ListData<?>> extends ArrayAdapter<T> {
 

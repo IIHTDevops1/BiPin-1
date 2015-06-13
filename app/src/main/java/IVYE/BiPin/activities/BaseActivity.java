@@ -1,12 +1,12 @@
-package IVYE.BiPin.activities;
+package ivye.bipin.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import IVYE.BiPin.helper.ActivityMonitorHelper;
-import IVYE.BiPin.util.LanguagesUtil;
-import IVYE.BiPin.util.LogUtil;
+import ivye.bipin.helper.ActivityMonitorHelper;
+import ivye.bipin.util.LanguagesUtil;
+import ivye.bipin.util.LogUtil;
 
 /**
  * Created by IGA on 4/6/15.

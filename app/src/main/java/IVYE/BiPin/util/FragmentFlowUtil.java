@@ -1,4 +1,4 @@
-package IVYE.BiPin.util;
+package ivye.bipin.util;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import IVYE.BiPin.MyConstant;
-import IVYE.BiPin.fragments.BaseRetainFragment;
-import IVYE.BiPin.helper.ActivityMonitorHelper;
+import ivye.bipin.MyConstant;
+import ivye.bipin.fragments.BaseRetainFragment;
+import ivye.bipin.helper.ActivityMonitorHelper;
 
 /**
  * Created by Andy Cheung on 4/5/15.
