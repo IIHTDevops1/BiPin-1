@@ -1,4 +1,4 @@
-package ivye.bipin;
+package ivye.bipin.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,11 +9,20 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBHelper extends SQLiteOpenHelper {
     // 資料庫名稱
-    public static final String DATABASE_NAME = "mydata.db";
+    public static final String DATABASE_NAME = "BiPin.db";
     // 資料庫版本，資料結構改變的時候要更改這個數字，通常是加一
     public static final int VERSION = 1;
     // 資料庫物件，固定的欄位變數
     private static SQLiteDatabase database;
+
+    public static DBHelper instance = null;
+
+
+    public static void initialize(Context context) {
+        if (instance == null) {
+            instance = new DBHelper(context);
+        }
+    }
 
     // 建構子，在一般的應用都不需要修改
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -21,11 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // 需要資料庫的元件呼叫這個方法，這個方法在一般的應用都不需要修改
-    public static SQLiteDatabase getDatabase(Context context) {
-        if (database == null || !database.isOpen()) {
-            database = new DBHelper(context, DATABASE_NAME, null, VERSION).getWritableDatabase();
-        }
-        return database;
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override

@@ -2,7 +2,7 @@
     <string name="app_name">比拚</string>
 
     <string name="global_spinner_please_select">請選擇</string>
-    <string name="fragment_splash_screen_page_welcome">歡迎使用</string>
+    <string name="fragment_splash_screen_page_welcome">比拚</string>
     <string name="fragment_main_textView_price">預算</string>
     <string name="fragment_main_textView_Requirement">需求</string>
 

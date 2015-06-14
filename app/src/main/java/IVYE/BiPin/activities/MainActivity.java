@@ -15,6 +15,7 @@ import com.android4devs.navigationdrawer.MyAdapter;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
+import ivye.bipin.database.DBHelper;
 import ivye.bipin.MyConstant;
 import ivye.bipin.R;
 import ivye.bipin.fragments.MainFragment;
@@ -36,7 +37,7 @@ public class MainActivity extends BaseActivity {
         public void publish(LogRecord record) {}
     };
     String TITLES[] = {"新檢索","更新資料庫", "關於我們"};
-    int ICONS[] = {R.drawable.ic_action_new, R.drawable.ic_action_about, R.drawable.ic_action_about};
+    int ICONS[] = {R.drawable.ic_action_new, R.drawable.ic_action_refresh, R.drawable.ic_action_about};
 
     String NAME = "BiPin";
     String EMAIL = "BiPin@homework.tw";
@@ -90,6 +91,7 @@ public class MainActivity extends BaseActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        DBHelper.initialize(getApplicationContext());
     }
 
     @Override
