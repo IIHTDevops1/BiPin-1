@@ -3,6 +3,7 @@ package ivye.bipin.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 /**
  * Created by Vongola on 2015/6/13.
@@ -13,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // 資料庫版本，資料結構改變的時候要更改這個數字，通常是加一
     public static final int VERSION = 1;
     // 資料庫物件，固定的欄位變數
-    private static SQLiteDatabase database;
+    private static SQLiteDatabase database = SQLiteDatabase.openDatabase(Environment.getExternalStorageDirectory()+"BiPin/"+DATABASE_NAME, null, 0);
 
     public static DBHelper instance = null;
 
