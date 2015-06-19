@@ -1,7 +1,9 @@
 package com.android4devs.navigationdrawer;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,7 +25,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private int profile;
     private String email;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements RecyclerView.OnItemTouchListener {
         int Holderid;
 
         TextView textView;
@@ -45,6 +47,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 profile = (ImageView) itemView.findViewById(R.id.circleView);
                 Holderid = 0;
             }
+        }
+
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
         }
     }
 
@@ -74,7 +87,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(MyAdapter.ViewHolder holder, int position) {
         if(holder.Holderid ==1) {
             holder.textView.setText(mNavTitles[position - 1]);
-            holder.imageView.setImageResource(mIcons[position -1]);
+            holder.imageView.setImageResource(mIcons[position - 1]);
+            Log.d("BiPin", mNavTitles[holder.Holderid]);
         }
         else{
 

@@ -2,6 +2,7 @@ package ivye.bipin.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.HashMap;
@@ -42,20 +43,14 @@ public class ItemGC {
         return result;
     }
 
-    public static HashMap<String, String> findGCByPrice(DBHelper dbh, int starand, int offect) {
+    public static HashMap<String, String> findGCByPrice(DBHelper dbh, int starand)  throws NullPointerException, CursorIndexOutOfBoundsException {
         HashMap<String, String> result = new HashMap<String, String>();
         db = dbh.getReadableDatabase();
-        Integer min = starand-offect;
-        if (min < 0){
-            min = 0;
-        }
-        Integer max = starand+offect;
-        Cursor cursor = db.query(TABLE_NAME, null, "Price>? and Price<?", new String[]{new Integer(min).toString(), new Integer(max).toString()}, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, null, "Price>0 and Price<?", new String[]{String.valueOf(starand)}, null, null, null);
         int i = cursor.getColumnCount();
-        while (cursor.moveToNext()) {
-            for(int j = 0; j<i; j++){
-                result.put(cursor.getColumnName(j), cursor.getString(j));
-            }
+        cursor.moveToLast();
+        for(int j = 0; j<i; j++){
+            result.put(cursor.getColumnName(j), cursor.getString(j));
         }
         cursor.close();
         return result;

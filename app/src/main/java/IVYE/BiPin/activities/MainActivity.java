@@ -3,22 +3,29 @@ package ivye.bipin.activities;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android4devs.navigationdrawer.MyAdapter;
 
+import java.io.IOException;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 import ivye.bipin.database.DBHelper;
 import ivye.bipin.MyConstant;
 import ivye.bipin.R;
+import ivye.bipin.database.UpdateHelper;
 import ivye.bipin.fragments.MainFragment;
+import ivye.bipin.listener.RecyclerItemClickListener;
 import ivye.bipin.util.FragmentFlowUtil;
 
 /**
@@ -50,7 +57,7 @@ public class MainActivity extends BaseActivity {
     private RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     private DrawerLayout Drawer;                                  // Declaring DrawerLayout
     private ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
-
+    protected DBHelper dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,48 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView.getContext() , new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) throws IllegalAccessException, InstantiationException {
+                switch (position){
+                    case 1:
+                        // 新檢索
+                        FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
+                                MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
+                        break;
+                    case 2:
+                        // 更新資料褲
+                        try {
+                            UpdateHelper.checkUpdate();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(view.getContext(), "動作完成！", Toast.LENGTH_LONG).show();
+                        break;
+                    case 3:
+                        // 關於我們
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                        alertDialogBuilder.setTitle("關於我們");
+                        // set dialog message
+                        alertDialogBuilder.setMessage("比拼(BiPin)是由逢甲大學資訊工程學系四位同學製作：\n" +
+                                "  - 前端：林柏丞\n" +
+                                "  - 後端：侯均靜\n" +
+                                "  - 偵錯：孫右錠\n" +
+                                "  - 美工：林倚婕\n" +
+                                "本APP目前仍在開發中，評估結果僅供參考。").setCancelable(true);
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                        break;
+                    default:
+                        Toast.makeText(view.getContext(), "這不可能發生啊，你對這個APP做了什麼？！", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }));
+
 
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // Drawer object Assigned to the view
         mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar,R.string.openDrawer,R.string.closeDrawer){
@@ -84,6 +133,18 @@ public class MainActivity extends BaseActivity {
         };
 
         try {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        UpdateHelper.checkUpdate();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(null, "更新失敗，未知的錯誤！", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }).start();
             FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
                     MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
         } catch (InstantiationException e) {
@@ -91,7 +152,6 @@ public class MainActivity extends BaseActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        DBHelper.initialize(getApplicationContext());
     }
 
     @Override
