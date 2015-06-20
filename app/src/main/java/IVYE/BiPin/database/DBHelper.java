@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Vongola on 2015/6/13.
@@ -23,12 +24,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static DBHelper instance = null;
 
-
-    public static void initialize(Context context) {
-        if (instance == null) {
-            instance = new DBHelper(context);
-        }
-    }
 
     // 建構子，在一般的應用都不需要修改
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {

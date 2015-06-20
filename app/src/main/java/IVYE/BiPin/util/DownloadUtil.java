@@ -2,6 +2,7 @@ package ivye.bipin.util;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,42 +68,22 @@ public class DownloadUtil {
      * 0：代表下載文件成功
      * 1：代表文件已經存在
      */
-    public int downFile(URL urlStr, String path, String fileName)//下載文件的方法
+    public int downFile(URL urlStr, String path, String fileName) throws IOException//下載文件的方法
     {
-        InputStream inputStream = null;
-        try
-        {
-            FileUtils fileUtils = new FileUtils();
-
-            if (fileUtils.isFileExist(path + fileName))
-            {
-                boolean is = fileUtils.isFileExistDelete(path + fileName);
-                if (is == false) return -1;
-            }
-            inputStream = getInputStreamFromUrl(urlStr);
-            File resultFile = fileUtils.writeFileFromStream(path, fileName, inputStream);
-            if (resultFile == null)
-            {
-                return -1;
-            }
-
+        HttpURLConnection urlConnection = (HttpURLConnection) urlStr.openConnection();
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setDoOutput(true);
+        urlConnection.connect();
+        File file = new File(path+fileName);
+        FileOutputStream fileOutput = new FileOutputStream(file);
+        InputStream fileInput = null;
+        fileInput = getInputStreamFromUrl(urlStr);
+        byte[] buffer = new byte[1024];
+        int bufferLength = 0;
+        while ( (bufferLength = fileInput.read(buffer)) > 0 ) {
+            fileOutput.write(buffer, 0, bufferLength);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return -1;
-        }
-        finally
-        {
-            try
-            {
-                inputStream.close();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+        fileOutput.close();
         return 0;
     }
 

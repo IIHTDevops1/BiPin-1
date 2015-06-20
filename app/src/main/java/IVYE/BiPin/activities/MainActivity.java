@@ -7,10 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -20,7 +18,6 @@ import java.io.IOException;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-import ivye.bipin.database.DBHelper;
 import ivye.bipin.MyConstant;
 import ivye.bipin.R;
 import ivye.bipin.database.UpdateHelper;
@@ -57,7 +54,7 @@ public class MainActivity extends BaseActivity {
     private RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     private DrawerLayout Drawer;                                  // Declaring DrawerLayout
     private ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
-    protected DBHelper dbh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,23 +73,24 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView.getContext() , new RecyclerItemClickListener.OnItemClickListener() {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView.getContext(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) throws IllegalAccessException, InstantiationException {
-                switch (position){
+                switch (position) {
                     case 1:
                         // 新檢索
                         FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
                                 MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
                         break;
                     case 2:
-                        // 更新資料褲
+                        // 更新資料庫
                         try {
                             UpdateHelper.checkUpdate();
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        Toast.makeText(view.getContext(), "動作完成！", Toast.LENGTH_LONG).show();
                         break;
                     case 3:
                         // 關於我們
@@ -118,6 +116,15 @@ public class MainActivity extends BaseActivity {
             }
         }));
 
+        try {
+            UpdateHelper.checkUpdate();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);        // Drawer object Assigned to the view
         mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar,R.string.openDrawer,R.string.closeDrawer){
@@ -131,20 +138,7 @@ public class MainActivity extends BaseActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
-
         try {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        UpdateHelper.checkUpdate();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        Toast.makeText(null, "更新失敗，未知的錯誤！", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            }).start();
             FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
                     MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
         } catch (InstantiationException e) {
@@ -152,6 +146,7 @@ public class MainActivity extends BaseActivity {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override

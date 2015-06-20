@@ -18,6 +18,9 @@ import com.gc.materialdesign.views.ButtonRectangle;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -58,7 +61,18 @@ public class MainFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
-//        UpdateHelper.forceUpdate();
+        File file = new File(Environment.getExternalStorageDirectory() + "/BiPin/BiPin.db");
+        if (!file.exists()) {
+            try {
+                UpdateHelper.checkUpdate();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         dbh = new DBHelper(view.getContext());
 
         MaterialSpinner spinner_requirement = (MaterialSpinner) view.findViewById(R.id.fragment_main_spinner_requirement);
