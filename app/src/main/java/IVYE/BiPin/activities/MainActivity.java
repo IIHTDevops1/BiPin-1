@@ -1,5 +1,6 @@
 package ivye.bipin.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -73,48 +74,7 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
         mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView.getContext(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) throws IllegalAccessException, InstantiationException {
-                switch (position) {
-                    case 1:
-                        // 新檢索
-                        FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
-                                MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
-                        break;
-                    case 2:
-                        // 更新資料庫
-                        try {
-                            UpdateHelper.checkUpdate();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case 3:
-                        // 關於我們
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-                        alertDialogBuilder.setTitle("關於我們");
-                        // set dialog message
-                        alertDialogBuilder.setMessage("比拼(BiPin)是由逢甲大學資訊工程學系四位同學製作：\n" +
-                                "  - 前端：林柏丞\n" +
-                                "  - 後端：侯均靜\n" +
-                                "  - 偵錯：孫右錠\n" +
-                                "  - 美工：林倚婕\n" +
-                                "本APP目前仍在開發中，評估結果僅供參考。").setCancelable(true);
 
-                        // create alert dialog
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
-
-                        break;
-                    default:
-                        Toast.makeText(view.getContext(), "這不可能發生啊，你對這個APP做了什麼？！", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }));
 
         try {
             UpdateHelper.checkUpdate();
@@ -138,6 +98,56 @@ public class MainActivity extends BaseActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(mRecyclerView.getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) throws IllegalAccessException, InstantiationException {
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        // 新檢索
+                        Drawer.closeDrawers();
+                        FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
+                                MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);
+                        break;
+                    case 2:
+                        // 更新資料庫
+                        Drawer.closeDrawers();
+                        Toast.makeText(view.getContext(), "開始更新資料庫", Toast.LENGTH_SHORT).show();
+                        try {
+                            UpdateHelper.checkUpdate();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(view.getContext(), "更新完成!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        // 關於我們
+                        Drawer.closeDrawers();
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                        alertDialogBuilder.setTitle("關於我們");
+                        // set dialog message
+                        alertDialogBuilder.setMessage("比拼(BiPin)是由逢甲大學資訊工程學系四位同學製作：\n" +
+                                "  - 前端：林柏丞\n" +
+                                "  - 後端：侯均靜\n" +
+                                "  - 偵錯：孫右錠\n" +
+                                "  - 美工：林倚婕\n" +
+                                "本APP目前仍在開發中，評估結果僅供參考。").setCancelable(true);
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                        break;
+                    default:
+                        Toast.makeText(view.getContext(), "這不可能發生啊，你對這個APP做了什麼？！", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }));
+
         try {
             FragmentFlowUtil.commitFragment(getSupportFragmentManager(), MainFragment.class, null,
                     MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, false, null, 0);

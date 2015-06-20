@@ -155,12 +155,13 @@ public class MainFragment extends BaseFragment {
                     powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.127));
                     gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.417));
                 } else {
-                    memPrice = 1700;
+                    memPrice = 1500;
                     cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.3));
-                    mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.15));
-                    hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
-                    powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.10));
-                    gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.2));
+                    mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
+                    hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.22));
+                    powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
+                    gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.23));
+                    Log.d("BiPinPrice", String.valueOf(cpuPrice) + "/" + String.valueOf(mbPrice) + "/" + String.valueOf(hddPrice) + "/" + String.valueOf(powerPrice) + "/" + String.valueOf(gcPrice));
                 }
 
 
