@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+
 import ivye.bipin.MyApplication;
 import ivye.bipin.R;
 import ivye.bipin.activities.MainActivity;
+import ivye.bipin.database.UpdateHelper;
 import ivye.bipin.fragments.BaseFragment;
 import ivye.bipin.util.LogUtil;
 
@@ -22,7 +25,7 @@ import ivye.bipin.util.LogUtil;
 public class SplashScreenFragment extends BaseFragment {
 
     private MyApplication application;
-    private static final int TIME_LIMIT = 2500;
+    private static final int TIME_LIMIT = 3500;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

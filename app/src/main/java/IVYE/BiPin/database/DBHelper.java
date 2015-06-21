@@ -6,14 +6,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
+
+import ivye.bipin.activities.MainActivity;
+import ivye.bipin.listener.RecyclerItemClickListener;
 
 /**
  * Created by Vongola on 2015/6/13.
  */
-public class DBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper implements Serializable {
     public static final String DATABASE_PATH = Environment.getExternalStorageDirectory() + "/BiPin/";
     // 資料庫名稱
     public static final String DATABASE_NAME = "BiPin.db";
@@ -34,6 +39,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
         super(context, DATABASE_PATH + DATABASE_NAME, null, VERSION);
     }
+
+
 
     @Deprecated
     @Override
@@ -59,5 +66,11 @@ public class DBHelper extends SQLiteOpenHelper {
             database.close();
         super.close();
 
+    }
+
+
+    @Override
+    public String getDatabaseName(){
+        return this.DATABASE_PATH + this.DATABASE_NAME;
     }
 }

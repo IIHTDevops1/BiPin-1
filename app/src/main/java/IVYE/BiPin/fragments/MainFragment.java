@@ -43,7 +43,7 @@ import ivye.bipin.util.FragmentFlowUtil;
  * Created by IGA on 9/6/15.
  */
 public class MainFragment extends BaseFragment {
-    private DBHelper dbh;
+    private DBHelper dbh = null;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -61,19 +61,10 @@ public class MainFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_main, container, false);
-        File file = new File(Environment.getExternalStorageDirectory() + "/BiPin/BiPin.db");
-        if (!file.exists()) {
-            try {
-                UpdateHelper.checkUpdate();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
+        if (dbh == null && ((new File(Environment.getExternalStorageDirectory() + "/BiPin/BiPin.db")).exists())) {
+            dbh = new DBHelper(view.getContext());
         }
-        dbh = new DBHelper(view.getContext());
 
         MaterialSpinner spinner_requirement = (MaterialSpinner) view.findViewById(R.id.fragment_main_spinner_requirement);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout
@@ -132,97 +123,101 @@ public class MainFragment extends BaseFragment {
                                  */
                 String tmp = "";
 
-                if (mEditText.getText() == null) {
-                    tmp = "0";
-                } else {
-                    tmp = mEditText.getText().toString();
-                }
-                int totalBudget = Integer.parseInt(tmp);
-                String selection = ((Spinner) view.findViewById(R.id.fragment_main_spinner_requirement)).getSelectedItem().toString();
-                int cpuPrice, memPrice, mbPrice, gcPrice, powerPrice, hddPrice;
-                if (selection.equals("文書") || selection.equals("寫程式")) {
-                    memPrice = 1500;
-                    cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
-                    mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
-                    hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
-                    powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
-                    gcPrice = 0;
-                } else if (selection.equals("遊戲")) {
-                    memPrice = 2000;
-                    cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.185));
-                    mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.106));
-                    hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.161));
-                    powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.127));
-                    gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.417));
-                } else {
-                    memPrice = 1500;
-                    cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.3));
-                    mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
-                    hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.22));
-                    powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
-                    gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.23));
-                    Log.d("BiPinPrice", String.valueOf(cpuPrice) + "/" + String.valueOf(mbPrice) + "/" + String.valueOf(hddPrice) + "/" + String.valueOf(powerPrice) + "/" + String.valueOf(gcPrice));
-                }
-
-
-                try {
-                    HashMap<String, String> target = new HashMap<String, String>();
-                    HashMap<String, Integer> targetPrice = new HashMap<String, Integer>();
-
-                    HashMap<String, String> itemTemp = ItemCPU.findCPUByPrice(dbh, cpuPrice);
-                    if (itemTemp == null)
-                        throw new NullPointerException();
-                    target.put("CPU", itemTemp.get("Company") + " " + itemTemp.get("Name"));
-                    targetPrice.put("CPU", Integer.parseInt(itemTemp.get("Price")));
-
-                    itemTemp = ItemMem.findMemByPrice(dbh, memPrice);
-                    if (itemTemp == null)
-                        throw new NullPointerException();
-                    target.put("Mem", itemTemp.get("Company") + " " + itemTemp.get("Name") + "-" + itemTemp.get("Clock"));
-                    targetPrice.put("Mem", Integer.parseInt(itemTemp.get("Price")));
-
-                    itemTemp = ItemMB.findMBByPrice(dbh, mbPrice);
-                    if (itemTemp == null)
-                        throw new NullPointerException();
-                    target.put("MB", itemTemp.get("Company") + " " + itemTemp.get("Name"));
-                    targetPrice.put("MB", Integer.parseInt(itemTemp.get("Price")));
-
-                    itemTemp = ItemDisk.findDiskByPrice(dbh, hddPrice);
-                    if (itemTemp == null)
-                        throw new NullPointerException();
-                    target.put("Disk", itemTemp.get("Company") + " " + itemTemp.get("Name") + " " + itemTemp.get("Size") + "GB");
-                    targetPrice.put("Disk", Integer.parseInt(itemTemp.get("Price")));
-
-                    if (gcPrice > 0) {
-                        itemTemp = ItemGC.findGCByPrice(dbh, gcPrice);
-                        if (itemTemp == null)
-                            throw new NullPointerException();
-                        target.put("GC", itemTemp.get("Company") + " " + itemTemp.get("Name"));
-                        targetPrice.put("GC", Integer.parseInt(itemTemp.get("Price")));
+                if ((new File(Environment.getExternalStorageDirectory() + "/BiPin/BiPin.db")).exists()) {
+                    if (mEditText.getText() == null) {
+                        tmp = "0";
+                    } else {
+                        tmp = mEditText.getText().toString();
+                    }
+                    int totalBudget = Integer.parseInt(tmp);
+                    String selection = ((Spinner) view.findViewById(R.id.fragment_main_spinner_requirement)).getSelectedItem().toString();
+                    int cpuPrice, memPrice, mbPrice, gcPrice, powerPrice, hddPrice;
+                    if (selection.equals("文書") || selection.equals("寫程式")) {
+                        memPrice = 1500;
+                        cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
+                        mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
+                        hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
+                        powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.25));
+                        gcPrice = 0;
+                    } else if (selection.equals("遊戲")) {
+                        memPrice = 2000;
+                        cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.185));
+                        mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.106));
+                        hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.161));
+                        powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.127));
+                        gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.417));
+                    } else {
+                        memPrice = 1500;
+                        cpuPrice = (int) Math.round(((totalBudget - memPrice) * 0.3));
+                        mbPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
+                        hddPrice = (int) Math.round(((totalBudget - memPrice) * 0.22));
+                        powerPrice = (int) Math.round(((totalBudget - memPrice) * 0.13));
+                        gcPrice = (int) Math.round(((totalBudget - memPrice) * 0.23));
+                        Log.d("BiPinPrice", String.valueOf(cpuPrice) + "/" + String.valueOf(mbPrice) + "/" + String.valueOf(hddPrice) + "/" + String.valueOf(powerPrice) + "/" + String.valueOf(gcPrice));
                     }
 
-                    itemTemp = ItemPower.findPowerByPrice(dbh, powerPrice);
-                    if (itemTemp == null)
-                        throw new NullPointerException();
-                    target.put("Power", itemTemp.get("Company") + " " + itemTemp.get("Name"));
-                    targetPrice.put("Power", Integer.parseInt(itemTemp.get("Price")));
 
-                    // 把所有東西塞進bundle
-                    Bundle args = new Bundle();
-                    args.putSerializable("TargetName", target);
-                    args.putSerializable("TargetPrice", targetPrice);
+                    try {
+                        HashMap<String, String> target = new HashMap<String, String>();
+                        HashMap<String, Integer> targetPrice = new HashMap<String, Integer>();
 
-                    // 切換Fragment
-                    FragmentFlowUtil.commitFragment(getActivity().getSupportFragmentManager(), CompleteFragment.class, args,
-                            MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, true, null, 0);
-                } catch (NullPointerException e) {
-                    Toast.makeText(view.getContext(), "配對失敗，可能是預算過低，請調整預算後重新開始估價！", Toast.LENGTH_LONG).show();
-                } catch (CursorIndexOutOfBoundsException e) {
-                    Toast.makeText(view.getContext(), "配對失敗，可能是預算過低，請調整預算後重新開始估價！", Toast.LENGTH_LONG).show();
-                } catch (java.lang.InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                        HashMap<String, String> itemTemp = ItemCPU.findCPUByPrice(dbh, cpuPrice);
+                        if (itemTemp == null)
+                            throw new NullPointerException();
+                        target.put("CPU", itemTemp.get("Company") + " " + itemTemp.get("Name"));
+                        targetPrice.put("CPU", Integer.parseInt(itemTemp.get("Price")));
+
+                        itemTemp = ItemMem.findMemByPrice(dbh, memPrice);
+                        if (itemTemp == null)
+                            throw new NullPointerException();
+                        target.put("Mem", itemTemp.get("Company") + " " + itemTemp.get("Name") + "-" + itemTemp.get("Clock"));
+                        targetPrice.put("Mem", Integer.parseInt(itemTemp.get("Price")));
+
+                        itemTemp = ItemMB.findMBByPrice(dbh, mbPrice);
+                        if (itemTemp == null)
+                            throw new NullPointerException();
+                        target.put("MB", itemTemp.get("Company") + " " + itemTemp.get("Name"));
+                        targetPrice.put("MB", Integer.parseInt(itemTemp.get("Price")));
+
+                        itemTemp = ItemDisk.findDiskByPrice(dbh, hddPrice);
+                        if (itemTemp == null)
+                            throw new NullPointerException();
+                        target.put("Disk", itemTemp.get("Company") + " " + itemTemp.get("Name") + " " + itemTemp.get("Size") + "GB");
+                        targetPrice.put("Disk", Integer.parseInt(itemTemp.get("Price")));
+
+                        if (gcPrice > 0) {
+                            itemTemp = ItemGC.findGCByPrice(dbh, gcPrice);
+                            if (itemTemp == null)
+                                throw new NullPointerException();
+                            target.put("GC", itemTemp.get("Company") + " " + itemTemp.get("Name"));
+                            targetPrice.put("GC", Integer.parseInt(itemTemp.get("Price")));
+                        }
+
+                        itemTemp = ItemPower.findPowerByPrice(dbh, powerPrice);
+                        if (itemTemp == null)
+                            throw new NullPointerException();
+                        target.put("Power", itemTemp.get("Company") + " " + itemTemp.get("Name"));
+                        targetPrice.put("Power", Integer.parseInt(itemTemp.get("Price")));
+
+                        // 把所有東西塞進bundle
+                        Bundle args = new Bundle();
+                        args.putSerializable("TargetName", target);
+                        args.putSerializable("TargetPrice", targetPrice);
+
+                        // 切換Fragment
+                        FragmentFlowUtil.commitFragment(getActivity().getSupportFragmentManager(), CompleteFragment.class, args,
+                                MyConstant.MAIN_ACTIVITY_FRAGMENT_CONTAINER_ID, true, null, 0);
+                    } catch (NullPointerException e) {
+                        Toast.makeText(view.getContext(), "配對失敗，可能是預算過低，請調整預算後重新開始估價！", Toast.LENGTH_LONG).show();
+                    } catch (CursorIndexOutOfBoundsException e) {
+                        Toast.makeText(view.getContext(), "配對失敗，可能是預算過低，請調整預算後重新開始估價！", Toast.LENGTH_LONG).show();
+                    } catch (java.lang.InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(view.getContext(), "資料庫不存在，請開啟網路並更新資料褲！", Toast.LENGTH_SHORT).show();
                 }
             }
         });

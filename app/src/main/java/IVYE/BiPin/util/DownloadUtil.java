@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,7 +21,7 @@ public class DownloadUtil {
      */
     private URL url = null;
 
-    public String downStr(URL urlStr)//下載字元流的方法
+    public String downStr(URL urlStr) throws ConnectException//下載字元流的方法
     {
         /**
          * String和StringBuffer他們都可以存儲和操作字元串，即包含多個字元的字元串數據。
